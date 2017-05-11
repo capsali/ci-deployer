@@ -213,10 +213,12 @@ class Deployer(object):
             content = yaml.load(f)
         maas_server = content['endpoint']
         maas_oauth = content['maas-oauth']
+	juju_endpoints = content['juju-endpoints']
         maas_environment = content['environment']
         user = 'user-' + content['user']
         password = content['password']
         self.controller, self.model = maas_environment.split(':')
+	juju_endpoint = juju_endpoints.split()
 
         self.juju = environment.Environment.connect(maas_environment)
         LOG.debug("Connection started with: %s" % self.juju.endpoint)
